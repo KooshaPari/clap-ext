@@ -45,7 +45,8 @@ pub fn add_common_subcommands(cmd: clap::Command) -> clap::Command {
             .about("Initialize a new project")
             .arg(
                 clap::arg!([path] "Path to initialize")
-                    .default_value("."),
+                    .default_value(".")
+                    .value_parser(clap::value_parser!(PathBuf)),
             )
             .arg(clap::arg!(-f --force "Force overwrite"))
             .arg(
@@ -56,7 +57,10 @@ pub fn add_common_subcommands(cmd: clap::Command) -> clap::Command {
     .subcommand(
         clap::Command::new("validate")
             .about("Validate a config or project")
-            .arg(clap::arg!([path] "Path to validate"))
+            .arg(
+                clap::arg!([path] "Path to validate")
+                    .value_parser(clap::value_parser!(PathBuf)),
+            )
             .arg(clap::arg!(--strict "Strict mode: warnings are errors")),
     )
     .subcommand(
