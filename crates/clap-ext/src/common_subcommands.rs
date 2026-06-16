@@ -49,23 +49,15 @@ pub fn add_common_subcommands(cmd: clap::Command) -> clap::Command {
                     .value_parser(clap::value_parser!(PathBuf)),
             )
             .arg(clap::arg!(-f --force "Force overwrite"))
-            .arg(
-                clap::arg!(-t --template <TEMPLATE> "Template to use")
-                    .default_value("default"),
-            ),
+            .arg(clap::arg!(-t --template <TEMPLATE> "Template to use").default_value("default")),
     )
     .subcommand(
         clap::Command::new("validate")
             .about("Validate a config or project")
-            .arg(
-                clap::arg!([path] "Path to validate")
-                    .value_parser(clap::value_parser!(PathBuf)),
-            )
+            .arg(clap::arg!([path] "Path to validate").value_parser(clap::value_parser!(PathBuf)))
             .arg(clap::arg!(--strict "Strict mode: warnings are errors")),
     )
-    .subcommand(
-        clap::Command::new("version").about("Print version + build info"),
-    )
+    .subcommand(clap::Command::new("version").about("Print version + build info"))
 }
 
 /// Trait alias: CLIs with common subcommands can implement this to
