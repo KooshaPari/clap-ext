@@ -242,15 +242,13 @@ impl ClapBasedCli {
 
         for (name, about, help) in &self.custom {
             cmd = cmd.subcommand(
-                clap::Command::new(name.clone())
-                    .about(about.clone())
-                    .arg(
-                        clap::Arg::new("args")
-                            .num_args(0..)
-                            .trailing_var_arg(true)
-                            .allow_hyphen_values(true)
-                            .help(help.clone()),
-                    ),
+                clap::Command::new(name.clone()).about(about.clone()).arg(
+                    clap::Arg::new("args")
+                        .num_args(0..)
+                        .trailing_var_arg(true)
+                        .allow_hyphen_values(true)
+                        .help(help.clone()),
+                ),
             );
         }
 
@@ -449,11 +447,23 @@ mod tests {
     fn help_contains_subcommands_and_flags() {
         let h = cli().help();
         assert!(h.contains("init"), "help should list init; got: {h}");
-        assert!(h.contains("validate"), "help should list validate; got: {h}");
+        assert!(
+            h.contains("validate"),
+            "help should list validate; got: {h}"
+        );
         assert!(h.contains("version"), "help should list version; got: {h}");
-        assert!(h.contains("serve"), "help should list custom subcommand; got: {h}");
-        assert!(h.contains("--config"), "help should describe --config; got: {h}");
-        assert!(h.contains("--verbose"), "help should describe --verbose; got: {h}");
+        assert!(
+            h.contains("serve"),
+            "help should list custom subcommand; got: {h}"
+        );
+        assert!(
+            h.contains("--config"),
+            "help should describe --config; got: {h}"
+        );
+        assert!(
+            h.contains("--verbose"),
+            "help should describe --verbose; got: {h}"
+        );
     }
 
     #[test]
