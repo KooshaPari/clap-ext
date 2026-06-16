@@ -1,3 +1,5 @@
+<!-- work-state: active | [========8/10] Block B consolidation in progress -->
+
 # clap-ext
 
 [![CI](https://github.com/KooshaPari/clap-ext/actions/workflows/ci.yml/badge.svg)](https://github.com/KooshaPari/clap-ext/actions/workflows/ci.yml)
