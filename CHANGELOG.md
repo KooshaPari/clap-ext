@@ -9,7 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`justfile`** — local task runner with recipes for `build`, `test`,
+  `lint`, `fmt`, `audit`, `deny`, `grade`, and a composite `ci` recipe
+  that mirrors CI parity.
+- **`deny.toml`** — `cargo-deny` configuration covering advisories,
+  licenses, bans, and sources; enables the `Deny` workflow to enforce
+  org-wide policy.
+- **`.editorconfig`** — UTF-8, LF, 4-space indent (2 for YAML/TOML);
+  final newline required.
+- **`.gitattributes`** — LF normalisation, lockfile diff suppression,
+  linguist hints for generated/docs paths.
+- **`.github/workflows/audit.yml`** — weekly `cargo-audit` (Monday 06:00
+  UTC) with concurrency + SHA-pinned actions.
+- **`.github/workflows/deny.yml`** — weekly `cargo-deny check`
+  (Wednesday 06:00 UTC) with concurrency + SHA-pinned actions.
+- **`.github/workflows/release.yml`** — tag-driven `cargo publish` to
+  crates.io with dry-run default for `workflow_dispatch`.
+- Concurrency controls (`cancel-in-progress` / exclusive) added to
+  existing `ci.yml`, `scorecard.yml`, and `release-attestation.yml`.
+
 ### Changed
+
+- All five active workflows now use SHA-pinned actions with concurrency
+  groups; job-level permissions remain explicit (no implicit `GITHUB_TOKEN`
+  escalation).
+- `CHANGELOG.md` reorganised with `[Unreleased]` block tracking this wave.
 
 ### Deprecated
 
@@ -18,6 +42,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+### Notes
+
+- This is the `orch-v12-s1-003` tier-0 hygiene + governance pass for the
+  v12 wide-tree rollout.
 
 ## [0.1.0] — 2026-06-12
 

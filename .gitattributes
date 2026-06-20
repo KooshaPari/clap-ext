@@ -1,0 +1,37 @@
+# .gitattributes — normalises line endings and enables linguist hints.
+
+# Auto-detect text files, force LF line endings.
+*                 text=auto eol=lf
+
+# Shell scripts must have LF.
+*.sh              text eol=lf
+
+# Windows scripts must have CRLF.
+*.bat             text eol=crlf
+*.cmd             text eol=crlf
+*.ps1             text eol=crlf
+
+# Markdown may have trailing whitespace (used for hard line breaks).
+*.md              text eol=lf whitespace=-trailing-space
+
+# Rust source — keep as-is, no transformations.
+*.rs              text eol=lf diff=rust
+
+# Configuration formats — enforce LF.
+*.toml            text eol=lf
+*.yaml            text eol=lf
+*.yml             text eol=lf
+*.json            text eol=lf
+*.lock            text eol=lf -diff
+
+# Treat lockfiles as binary for diff purposes (so reviewers focus on content).
+Cargo.lock        -diff
+
+# Generated / vendored — exclude from language stats.
+target/           linguist-generated=true
+**/*.min.js       linguist-generated=true
+**/*.min.css      linguist-generated=true
+
+# Documentation files should be counted as docs.
+*.md              linguist-documentation=true
+docs/             linguist-documentation=true
