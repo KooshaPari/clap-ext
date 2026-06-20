@@ -9,7 +9,7 @@ authors.workspace = true
 description = "Shared Rust CLI extension library: common subcommands, config flags, error display for clap-based CLIs"
 keywords = ["cli", "clap", "argparse", "extension", "boilerplate"]
 categories = ["command-line-utilities", "development-tools"]
-readme = "README.md"
+# readme = "../README.md"  # points to workspace root README
 
 [dependencies]
 clap = { workspace = true }
