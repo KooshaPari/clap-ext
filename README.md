@@ -15,7 +15,6 @@ org (and countless other Rust projects) re-implement on day one:
 - **Common subcommands** (`init`, `validate`, `version`)
 - **Unified error type** (`CliError` enum with thiserror + anyhow integration)
 - **Tracing setup** (`setup_tracing(verbosity)`)
-- **Macros** (`#[clap_ext_common_subcommands]` marker)
 
 ## Quick start
 
@@ -82,7 +81,6 @@ are all wired up.
 | `error` | `CliError`, `CliResult`, `exit_with()` | Unified error enum (Io, Config, Parse, Validation, NotFound, Network, ...) |
 | `logging` | `setup_tracing()`, `setup_tracing_from_count()` | tracing-subscriber setup with RUST_LOG honoring |
 | `prelude` | re-exports | One-line import for the common case |
-| `clap-ext-macros` | `#[clap_ext_common_subcommands]` | Proc-macro marker for subcommand enums |
 
 ## Verbosity levels
 

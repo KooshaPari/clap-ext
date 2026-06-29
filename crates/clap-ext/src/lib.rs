@@ -99,8 +99,8 @@ mod tests {
     /// three documented variants. Parse each and inspect.
     #[test]
     fn fr002_common_commands_enum_parses_three_variants() {
-        use clap::Parser;
         use crate::common_subcommands::CommonCommands;
+        use clap::Parser;
 
         #[derive(Debug, Parser)]
         struct W {

@@ -9,11 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `common_subcommands::InitCmd::validate_template()` — defense-in-depth
+  helper that rejects templates containing path separators (`/`, `\`)
+  or `..` traversal segments. Use it when wiring `InitCmd` to a future
+  template loader. `init` itself does **not** read template files today;
+  this is purely a hardening helper for future consumers.
+
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+- `clap-ext-macros` proc-macro crate. The
+  `#[clap_ext_common_subcommands]` attribute was a no-op passthrough that
+  advertised codegen it did not perform and had **zero usages** in the
+  workspace. The 3 common variants remain available as standalone structs
+  (`InitCmd`, `ValidateCmd`, `VersionCmd`) and as the bundled
+  `CommonCommands` enum in `common_subcommands`.
 
 ### Fixed
 
@@ -47,9 +60,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `setup_tracing(filter)` — `tracing-subscriber` setup with RUST_LOG honor
   - `setup_tracing_from_count(verbose_count, quiet)` — convenience wrapper
 - `prelude` module — one-line import for the common case
-- `clap-ext-macros` crate:
-  - `#[clap_ext_common_subcommands]` — proc-macro attribute marker
-    (passthrough for now; future versions will inject variants)
 - `examples/basic` — runnable demo CLI
 - 13 tests across 4 test files:
   - `tests/common_args.rs` (4 tests)
@@ -64,8 +74,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This is the v0.1.0 cut for the V9-T3-5 rollout wave. Adoption PRs
   in 5 sample repos are filed under
   `feat/clap-ext-adopt-2026-06-11` branches.
-- The `clap_ext_common_subcommands` proc macro is currently a
-  passthrough + doc-comment tag. Future versions (0.2.0+) will
-  inject the 3 common variants automatically.
 - MSRV is **1.82** (matches the org-wide `clippy.toml` MSRV policy).
 [Unreleased]: https://github.com/KooshaPari/clap-ext/compare/HEAD
